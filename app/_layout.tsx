@@ -1,5 +1,5 @@
 import { Slot, usePathname, useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function RootLayout() {
   const router = useRouter();
@@ -11,14 +11,18 @@ export default function RootLayout() {
     setMounted(true);
   }, []);
 
+  const checkAuth = useCallback(() => {
+    const userIsAuthed = false; // Replace with real logic
+    if (!userIsAuthed && pathname !== "/onboarding") {
+      router.replace("/onboarding");
+    }
+  }, [pathname, router]);
+
   useEffect(() => {
     if (mounted) {
-      const userIsAuthed = false; // Replace with real logic
-      if (!userIsAuthed && pathname !== "/onboarding") {
-        router.replace("/onboarding");
-      }
+      checkAuth();
     }
-  }, [mounted, pathname]);
+  }, [mounted, checkAuth]);
 
   return <Slot />;
 }

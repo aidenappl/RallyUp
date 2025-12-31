@@ -1,6 +1,6 @@
 import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   Alert,
   Image,
@@ -10,6 +10,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+// TODO: react-native-phone-number-input has peer dependency issues with React 19.
+// Consider replacing with a more maintained alternative like react-native-phone-input
+// or implementing a custom phone input component.
 import PhoneInput from "react-native-phone-number-input";
 
 export default function OnboardingScreen() {
@@ -64,11 +67,12 @@ export default function OnboardingScreen() {
         style={styles.input}
       />
 
+      {/* @ts-expect-error - react-native-phone-number-input has React 19 compatibility issues */}
       <PhoneInput
         ref={phoneInputRef}
         defaultCode="US"
         layout="first"
-        onChangeFormattedText={(text) => setPhoneNumber(text)}
+        onChangeFormattedText={(text: string) => setPhoneNumber(text)}
         containerStyle={styles.phoneInputContainer}
         textContainerStyle={styles.phoneInputText}
       />

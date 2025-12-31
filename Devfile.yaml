@@ -1,0 +1,48 @@
+commands:
+  - name: dev
+    description: Start Expo development server
+    run: npx expo start
+
+  - name: ios
+    description: Start iOS simulator
+    run: npx expo start --ios
+
+  - name: android
+    description: Start Android emulator
+    run: npx expo start --android
+
+  - name: web
+    description: Start web development server
+    run: npx expo start --web
+
+  - name: lint
+    description: Run ESLint
+    run: npx expo lint
+
+  - name: format
+    description: Format code with Prettier
+    run: npx prettier --write "**/*.{ts,tsx,js,jsx,json}"
+
+  - name: typecheck
+    description: Run TypeScript type checking
+    run: npx tsc --noEmit
+
+  - name: clean
+    description: Clean build artifacts and reinstall
+    run: rm -rf node_modules .expo && npm install
+
+  - name: reset
+    description: Reset project to fresh state
+    run: node ./scripts/reset-project.js
+
+  - name: build:ios
+    description: Build iOS app
+    run: npx expo build:ios
+
+  - name: build:android
+    description: Build Android app
+    run: npx expo build:android
+
+  - name: prebuild
+    description: Generate native projects
+    run: npx expo prebuild
